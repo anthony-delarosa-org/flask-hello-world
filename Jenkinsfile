@@ -3,7 +3,11 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'pip3 install -r requirements.txt --user'
+        sh '''
+            python -m venv .venv
+            . .venv/bin/activate
+            pip3 install -r requirements.txt'
+            pytest -v
       }
     }
     stage('test') {
