@@ -6,7 +6,7 @@ pipeline {
         sh '''
             python3 -m venv .venv
             . .venv/bin/activate
-            pip3 intall -r requirements.txt
+            pip3 install -r requirements.txt
             pytest -v
         '''
       }
