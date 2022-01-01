@@ -3,17 +3,17 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'pip3 install -r requirements.txt'
+        sh 'sudo pip3 install -r requirements.txt'
       }
     }
     stage('test') {
       steps {
-        sh 'python3 test.py'
+        sh 'sudo python3 test.py'
       }   
     }
     stage('deploy') {
       steps {
-        sh 'python3 app.py'
+        sh 'sudo python3 app.py'
       }   
     }
   }
