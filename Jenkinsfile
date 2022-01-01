@@ -21,8 +21,8 @@ pipeline {
     stage('deploy') {
       steps {
         sh '''
-            . .venv/bin/activate
-            python3 app.py
+            docker container run -d -p 5000:5000 --name flask-hello-world python:3.7.12
+            docker container exec -ti flask-hello-world pyton3 app.py
         '''
       }   
     }
