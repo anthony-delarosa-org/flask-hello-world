@@ -35,7 +35,7 @@ pipeline {
       steps {
         sh '''
         docker --version
-        echo "Approved by: ${username}."
+        echo "Approved by: ${username}"
         '''
       }   
     }
