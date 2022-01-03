@@ -16,7 +16,7 @@ pipeline {
               python3 -m venv .venv
               . .venv/bin/activate
               pip3 install -r requirements.txt
-              echo ${username}
+              echo The variable ${username} can be used inside the Docker Container
           '''
         }
       }
@@ -36,7 +36,7 @@ pipeline {
         steps {
           sh '''
               docker --version
-              echo 'Approved by: ${username}'
+              echo 'Deployed...'
           '''
         }
       }
