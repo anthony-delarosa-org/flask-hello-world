@@ -33,8 +33,10 @@ pipeline {
       stage('deploy') {
         agent any
         steps {
-            scipt {
-              echo 'Approved by: ${env.username}'
+          sh '''
+              . .venv/bin/activate
+              python3 test.py
+          '''
         }
       }
     }
