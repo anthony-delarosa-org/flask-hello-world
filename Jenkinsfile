@@ -14,7 +14,7 @@ pipeline {
     
     stages {
        
-       stage('Configure AWS Envrionemtn') {
+       stage('Configure AWS Envrionment') {
            agent any
            steps {
                sh '''
@@ -30,6 +30,9 @@ pipeline {
           steps {
              script {
              sh '''
+                export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
                 aws ecr get-login-password -- region ${AWS_REGION} | docker login -- username AWS -- password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
              '''
            }
