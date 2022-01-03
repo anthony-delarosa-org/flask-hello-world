@@ -9,7 +9,6 @@ pipeline {
               message 'Press OK to Proceed'
               parameters {
                   string(name:'username', defaultValue: 'user', description: 'Type your username')
-                  string(name:'environment', defaultValue: 'dev', description: 'Type which environment you want to deploy to')
           }
         }
         steps {
@@ -17,7 +16,6 @@ pipeline {
               python3 -m venv .venv
               . .venv/bin/activate
               pip3 install -r requirements.txt
-              echo The variable ${environment} can be used inside the Docker Container
           '''
         }
       }
@@ -37,9 +35,9 @@ pipeline {
         steps {
           sh '''
               docker --version
-              echo 'Deployed...'
+              echo 'Deployed Successfully!'
           '''
         }
       }
-    }
   }
+}
