@@ -33,7 +33,6 @@ pipeline {
       stage('deploy') {
         agent any
         steps {
-          sh 'docker --version'
             scipt {
               echo 'Approved by: ${env.username}'
         }
