@@ -1,6 +1,7 @@
 pipeline {
-  agent { docker { image 'python:3.7.12' } }
+  agent any
   stages {
+    agent { docker { image 'python:3.7.12' } }
     stage('build') {
       steps {
         sh '''
@@ -11,6 +12,7 @@ pipeline {
       }
     }
     stage('test') {
+      agent { docker { image 'python:3.7.12' } }
       steps {
         sh '''
             . .venv/bin/activate
@@ -21,8 +23,8 @@ pipeline {
     stage('deploy') {
       steps {
         sh '''
-            . .venv/bin/activate
-            nohup python3 app.py
+        docker --version
+        echo 'Deploying something...'
         '''
       }   
     }
