@@ -3,6 +3,9 @@ pipeline {
     parameters{
         choice(choices: ['dev', 'stage', 'prod'], description: 'Name of the Environment', name: 'ENV')
         string(defaultValue: "aws account id", description: 'Please paste your AWS Account ID', name: 'AWS_ACCOUNT_ID')
+        string(defaultValue: "aws access key id", description: 'Please paste your AWS Access Key Id', name: 'AWS_ACCESS_KEY_ID')
+        string(defaultValue: "aws secret access key", description: 'Please paste your AWS Secret Access Key', name: 'AWS_SECRET_ACCESS_KEY')
+        string(defaultValue: "aws session token", description: 'Please paste your AWS Session Token', name: 'AWS_SESSION_TOKEN')
         string(defaultValue: "aws ecr repo name", description: 'Please type ECR Repo Name', name: 'AWS_ECR_REPO_NAME')
         string(defaultValue: "aws ecr image tag", description: 'Please type ECR Repo Name', name: 'AWS_ECR_IMAGE_TAG')
         choice(choices: ['us-west-2', 'ca-central-1','us-east-1'], description: 'What AWS Region?', name: 'AWS_REGION')
