@@ -7,7 +7,6 @@ pipeline {
       }
         input{
               message 'Press OK to Proceed'
-              submitter 'user1,user2'
               parameters {
                   string(name:'username', defaultValue: 'user', description: 'Type your username')
           }
@@ -36,7 +35,7 @@ pipeline {
         steps {
           sh '''
           docker --version
-          echo 'Approved by: ${username}'
+          echo Approved by: "${username}"
           '''
         }   
       }
