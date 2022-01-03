@@ -1,15 +1,15 @@
 pipeline {
     agent none
+    parameters{
+        choice(choices: ['dev', 'stage', 'prod'], description: 'Name of the Environment', name: 'ENV')
+        choice(choices: ['us-west-2', 'ca-central-1','us-east-1'], description: 'What AWS Region?', name: 'AWS_DEFAULT_REGION')
+        string(defaultValue: "username", description: 'Please type your username', name: 'USERNAME')
+    }
     stages {
       stage('build') {
          agent {
         docker { image 'python:3.7.12' }
       }
-        parameters{
-              choice(choices: ['dev', 'stage', 'prod'], description: 'Name of the Environment', name: 'ENV')
-              choice(choices: ['us-west-2', 'ca-central-1','us-east-1'], description: 'What AWS Region?', name: 'AWS_DEFAULT_REGION')
-              string(defaultValue: "username", description: 'Please type your username', name: 'USERNAME')
-          }
         steps {
           sh '''
               python3 -m venv .venv
