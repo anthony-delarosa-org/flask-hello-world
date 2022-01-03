@@ -7,7 +7,6 @@ pipeline {
         string(defaultValue: "aws ecr image tag", description: 'Please type ECR Repo Name', name: 'AWS_ECR_IMAGE_TAG')
         choice(choices: ['us-west-2', 'ca-central-1','us-east-1'], description: 'What AWS Region?', name: 'AWS_REGION')
         string(defaultValue: "username", description: 'Please type your username', name: 'USERNAME')
-        string(defaultValue: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${AWS_ECR_REPO_NAME}", description: 'AWS ECR Repo URI', name: 'AWS_ECR_REPO_URI')
     }
     
     stages {
@@ -17,7 +16,7 @@ pipeline {
           steps {
              script {
              sh '''
-                aws ecr get-login-password — region ${params.AWS_REGION} | docker login — username AWS — password-stdin ${params.AWS_ACCOUNT_ID}.dkr.ecr.${param.AWS_DEFAULT_REGION}.amazonaws.com
+                aws ecr get-login-password — region ${AWS_REGION} | docker login — username AWS — password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
              '''
            }
          }
