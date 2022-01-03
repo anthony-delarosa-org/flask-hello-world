@@ -5,8 +5,8 @@ pipeline {
         submitter 'user1,user2'
         parameters {
             string(name:'username', defaultValue: 'user', description: 'Type your username')
+        }
     }
-  }
     stages {
       stage('build') {
          agent { 
@@ -41,6 +41,5 @@ pipeline {
           '''
         }   
       }
-    }
   }
   
