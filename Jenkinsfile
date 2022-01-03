@@ -1,17 +1,16 @@
 pipeline {
     agent none
-    input{
-        message 'Press OK to Proceed'
-        submitter 'user1,user2'
-        parameters {
-            string(name:'username', defaultValue: 'user', description: 'Type your username')
-        }
-    }
     stages {
       stage('build') {
          agent { 
         docker { image 'python:3.7.12' } 
       }
+        input{
+              message 'Press OK to Proceed'
+              submitter 'user1,user2'
+              parameters {
+                  string(name:'username', defaultValue: 'user', description: 'Type your username')
+          }
         }
         steps {
           sh '''
@@ -41,5 +40,6 @@ pipeline {
           '''
         }   
       }
+    }
   }
   
