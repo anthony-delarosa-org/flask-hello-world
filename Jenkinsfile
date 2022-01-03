@@ -10,7 +10,6 @@ pipeline {
               choice(choices: ['us-west-2', 'ca-central-1','us-east-1'], description: 'What AWS Region?', name: 'AWS_DEFAULT_REGION')
               string(defaultValue: "username", description: 'Please type your username', name: 'USERNAME')
           }
-        }
         steps {
           sh '''
               python3 -m venv .venv
