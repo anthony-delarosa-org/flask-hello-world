@@ -5,6 +5,12 @@ pipeline {
        agent { 
       docker { image 'python:3.7.12' } 
     }
+      input{
+		    message "Press OK to Proceed"
+		    submitter "user1,user2"
+		    parameters {
+			    string(name:'username', defaultValue: 'user', description: 'Type your username')
+		}
       steps {
         sh '''
             python3 -m venv .venv
@@ -29,7 +35,7 @@ pipeline {
       steps {
         sh '''
         docker --version
-        echo 'Deploying something...'
+        echo "Approved by: ${username}."
         '''
       }   
     }
