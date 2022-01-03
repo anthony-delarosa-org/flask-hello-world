@@ -1,10 +1,10 @@
 pipeline {
-  agent any
+  agent none
   stages {
-    agent { 
+    stage('build') {
+       agent { 
       docker { image 'python:3.7.12' } 
     }
-    stage('build') {
       steps {
         sh '''
             python3 -m venv .venv
