@@ -13,24 +13,6 @@ pipeline {
     }
     
     stages {
-<<<<<<< HEAD
-      stage('build') {
-         agent {
-        docker { image 'python:3.7.12' }
-      }
-        input{
-              message 'Press OK to Proceed'
-              parameters {
-                  string(name:'username', defaultValue: 'user', description: 'Type your username')
-          }
-        }
-        steps {
-          sh '''
-              python3 -m venv .venv
-              . .venv/bin/activate
-              pip3 install -r requirements.txt
-          '''
-=======
        
        stage('Configure AWS Envrionment') {
            agent any
@@ -41,7 +23,6 @@ pipeline {
                   export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
              ''' 
            }
->>>>>>> a0dbfd7184b87983f8e38fdeff4db3a3b9b73e2c
         }
     
        stage('Log into AWS ECR') {
@@ -73,19 +54,6 @@ pipeline {
            agent {
               docker { image 'python:3.7.12' }
         }
-<<<<<<< HEAD
-      }
-      stage('deploy') {
-        agent any
-        steps {
-          sh '''
-              docker --version
-              echo 'Deployed Successfully!'
-          '''
-        }
-      }
-  }
-=======
            steps {
               sh '''
                 . .venv/bin/activate
@@ -98,7 +66,7 @@ pipeline {
           agent any
           steps {
              script {
-             dockerImage = docker.build -t "${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}" 
+             dockerImage = docker.build "${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}" 
            }
          }
        }
@@ -111,5 +79,4 @@ pipeline {
         }
     }
   } 
->>>>>>> a0dbfd7184b87983f8e38fdeff4db3a3b9b73e2c
 }
