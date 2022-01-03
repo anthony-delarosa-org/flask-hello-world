@@ -66,9 +66,19 @@ pipeline {
           agent any
           steps {
              script {
-             dockerImage = docker.build "${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}" 
+               dockerImage = docker.build "${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}" 
            }
          }
+       }
+
+       stage('Pushing to ECR') {
+           agent any
+           steps {
+             script {
+                sh 'docker tag ${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}' 
+                sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}'
+              }
+           }
        }
        stage('deploy') {
            agent any
