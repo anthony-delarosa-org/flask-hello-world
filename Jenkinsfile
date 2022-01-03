@@ -1,5 +1,5 @@
 pipeline {
-  agent none
+  agent any
   stages {
     agent { 
       docker { image 'python:3.7.12' } 
