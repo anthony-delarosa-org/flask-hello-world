@@ -33,9 +33,7 @@ pipeline {
       stage('deploy') {
         agent any
         steps {
-          sh '
-          echo Approved by: "${username}"
-          '
+          sh 'echo Approved by: "${username}'
         }   
       }
     }
