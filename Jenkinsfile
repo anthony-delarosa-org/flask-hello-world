@@ -9,9 +9,9 @@ pipeline {
         string(defaultValue: "username", description: 'Please type your username', name: 'USERNAME')
         string(defaultValue: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${AWS_ECR_REPO_NAME}", description: 'AWS ECR Repo URI', name: 'AWS_ECR_REPO_URI')
     }
-
+    
     stages {
-
+    
     stage(‘Logging into AWS ECR’) {
        agent any
        steps {
@@ -20,7 +20,7 @@ pipeline {
         }
       }
     }
-
+    
     stage('build') {
        agent {
        docker { image 'python:3.7.12' }
@@ -45,15 +45,23 @@ pipeline {
              python3 test.py
          '''
        }
-     }
-
+     } 
+    
     stage(‘Building image’) {
        agent any
        steps {
           script {
-          dockerImage = docker.build "${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}"
+          dockerImage = docker.build "${AWS_ECR_REPO_NAME}:${AWS_ECR_IMAGE_TAG}" 
         }
       }
     }
-  }
+    stage('deploy') {
+        agent any
+        steps {
+          sh '''
+              echo Deployed and Approved by: ${USERNAME}
+          '''
+        }
+    }
+  } 
 }
