@@ -16,6 +16,7 @@ pipeline {
               python3 -m venv .venv
               . .venv/bin/activate
               pip3 install -r requirements.txt
+              echo ${username}
           '''
         }
       }
@@ -33,8 +34,10 @@ pipeline {
       stage('deploy') {
         agent any
         steps {
-            scipt {
-              echo 'Approved by: ${env.username}'
+          sh '''
+              docker --version
+              echo 'Approved by: ${username}'
+          '''
         }
       }
     }
