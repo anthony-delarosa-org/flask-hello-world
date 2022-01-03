@@ -11,6 +11,7 @@ pipeline {
 		    parameters {
 			    string(name:'username', defaultValue: 'user', description: 'Type your username')
 		}
+      }
       steps {
         sh '''
             python3 -m venv .venv
