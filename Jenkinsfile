@@ -27,6 +27,7 @@ pipeline {
           sh '''
               . .venv/bin/activate
               python3 test.py
+              echo The Username is ${USERNAME}
           '''
         }
       }
@@ -35,7 +36,7 @@ pipeline {
         steps {
           sh '''
               docker --version
-              echo 'Deployed and Approved by: ${USERNAME}'
+              echo Deployed and Approved by: ${USERNAME}
           '''
         }
       }
