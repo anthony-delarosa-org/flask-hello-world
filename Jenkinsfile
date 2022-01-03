@@ -5,11 +5,10 @@ pipeline {
          agent {
         docker { image 'python:3.7.12' }
       }
-        input{
-              message 'Press OK to Proceed'
-              parameters {
-                  string(name:'username', defaultValue: 'user', description: 'Type your username')
-                  string(name:'environment', defaultValue: 'dev', description: 'Type which environment you want to deploy to')
+        parameters{
+              choice(choices: ['dev', 'stage', 'prod'], description: 'Name of the Environment', name: 'ENV')
+              choice(choices: ['us-west-2', 'ca-central-1','us-east-1'], description: 'What AWS Region?', name: 'AWS_DEFAULT_REGION')
+              string(defaultValue: "username", description: 'Please type your username', name: 'USERNAME')
           }
         }
         steps {
@@ -17,7 +16,7 @@ pipeline {
               python3 -m venv .venv
               . .venv/bin/activate
               pip3 install -r requirements.txt
-              echo The variable ${environment} can be used inside the Docker Container
+              echo The variable ${ENV} can be used inside the Docker Container
           '''
         }
       }
