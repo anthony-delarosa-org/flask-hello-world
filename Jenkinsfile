@@ -47,7 +47,7 @@ pipeline {
           }
         } 
        
-       stage(‘Building image’) {
+       stage('Building image') {
           agent any
           steps {
              script {
