@@ -1,7 +1,9 @@
 pipeline {
   agent none
   stages {
-    agent { docker { image 'python:3.7.12' } }
+    agent { 
+      docker { image 'python:3.7.12' } 
+    }
     stage('build') {
       steps {
         sh '''
@@ -12,7 +14,9 @@ pipeline {
       }
     }
     stage('test') {
-      agent { docker { image 'python:3.7.12' } }
+      agent { 
+        docker { image 'python:3.7.12' } 
+      }
       steps {
         sh '''
             . .venv/bin/activate
